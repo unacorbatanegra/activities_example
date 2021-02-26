@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/domains.dart';
-import '../../../models/models.dart';
-import '../../widgets/widgets.dart';
+import '../../../../domain/domains.dart';
+import '../../../../models/models.dart';
+import '../../../widgets/widgets.dart';
 
-class ActivitieController extends GetxController {
+class ActivitieOrganizationController extends GetxController {
   final ActivitieDomain domain;
 
   TextEditingController nameController;
@@ -17,7 +17,7 @@ class ActivitieController extends GetxController {
   final _isEditing = false.obs;
   final _isLoading = false.obs;
 
-  ActivitieController({@required this.domain});
+  ActivitieOrganizationController({@required this.domain});
 
   @override
   void onInit() {

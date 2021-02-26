@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/widgets.dart';
+import '../../../widgets/widgets.dart';
 import 'activitie_controller.dart';
 
-class ActivitiePage extends GetView<ActivitieController> {
-  const ActivitiePage({Key key}) : super(key: key);
+class ActivitieOrganizationPage
+    extends GetView<ActivitieOrganizationController> {
+  const ActivitieOrganizationPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

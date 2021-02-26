@@ -1,16 +1,31 @@
+import 'package:hive/hive.dart';
+
 import '../role/role.dart';
 
+part 'user.g.dart';
+
+@HiveType(typeId: 0)
 class User {
-  final String email;
-  final String user;
-  final String name;
-  final String lastName;
-  final String dni;
-  final String phone;
-  final String uid;
-  final String urlImg;
-  final bool block;
-  final Role role;
+  @HiveField(0)
+   String email;
+  @HiveField(1)
+   String user;
+  @HiveField(2)
+   String name;
+  @HiveField(3)
+   String lastName;
+  @HiveField(4)
+   String dni;
+  @HiveField(5)
+   String phone;
+  @HiveField(6)
+   String uid;
+  @HiveField(7)
+   String urlImg;
+  @HiveField(8)
+   bool block;
+  @HiveField(9)
+   Role role;
 
   User({
     this.email,

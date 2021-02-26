@@ -2,27 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/domains.dart';
+import '../../../../domain/domains.dart';
 import 'activities_controller.dart';
 import 'widgets/activitie_widget.dart';
 import 'widgets/custom_app_bar.dart';
 
-class CustomersPage extends StatelessWidget {
-  const CustomersPage({Key key}) : super(key: key);
+class ActivitiesOrganizationPage extends StatelessWidget {
+  const ActivitiesOrganizationPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: ActivitiesController(
+      init: ActivitiesOrganizationController(
         domain: ActivitieDomain(),
       ),
-      builder: (_) => _CustomerPage(),
+      builder: (_) => _ActivitiesOrganizationPage(),
     );
   }
 }
 
-class _CustomerPage extends GetView<ActivitiesController> {
-  const _CustomerPage({Key key}) : super(key: key);
+class _ActivitiesOrganizationPage
+    extends GetView<ActivitiesOrganizationController> {
+  const _ActivitiesOrganizationPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

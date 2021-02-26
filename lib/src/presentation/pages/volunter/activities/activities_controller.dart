@@ -1,18 +1,18 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/domains.dart';
-import '../../../models/models.dart';
-import '../../../services/services.dart';
-import '../../../utils/utils.dart';
+import '../../../../domain/domains.dart';
+import '../../../../models/models.dart';
+import '../../../../services/services.dart';
+import '../../../../utils/utils.dart';
 
-class ActivitiesController extends GetxController {
+class ActivitiesVolunterController extends GetxController {
   final ActivitieDomain domain;
 
   ScrollController scrollController;
   TextEditingController controller;
 
-  ActivitiesController({
+  ActivitiesVolunterController({
     @required this.domain,
   });
 
@@ -75,14 +75,14 @@ class ActivitiesController extends GetxController {
 
   void onAdd() async {
     final result = await Get.toNamed(
-      RouteName.activitie,
+      RouteName.activitieOrganization,
     ) as bool;
     if (result ?? false) init();
   }
 
   void onTap(int index) async {
     final result = await Get.toNamed(
-      RouteName.activitie,
+      RouteName.activitieOrganization,
       arguments: list[index],
     ) as bool;
     print(result);

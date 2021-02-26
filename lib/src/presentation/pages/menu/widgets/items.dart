@@ -5,7 +5,17 @@ import '../../pages.dart';
 
 mixin Items {
   static final pages = [
-    CustomersPage(),
+    organization,
+    volunter,
+  ];
+
+  static final organization = [
+    ActivitiesOrganizationPage(),
+    SettingsPage(),
+  ];
+
+  static final volunter = [
+    ActivitiesVolunterPage(),
     SettingsPage(),
   ];
 

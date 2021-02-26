@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/domains.dart';
+import '../../../models/models.dart';
 import 'extension.dart';
 import 'widgets/items.dart';
 
@@ -13,7 +14,8 @@ class MenuController extends GetxController {
 
   final _currentIndex = 0.obs;
   final _isLoading = false.obs;
-
+  final _currentRole = Rx<Role>(Role.organization);
+  
   MenuController({
     @required this.userDomain,
   }) : assert(userDomain != null);
@@ -25,7 +27,7 @@ class MenuController extends GetxController {
   }
 
   void init() async {
-    _isLoading.toggle();
+    _isLoading(true);
     final user = await userDomain.get(userDomain.currentUserUid);
     print(user?.toJson());
     conectivity.onConnectivityChanged.listen(
@@ -38,15 +40,15 @@ class MenuController extends GetxController {
             )
           : Get.hideSnackBar(),
     );
-    _isLoading.toggle();
+    _isLoading(false);
   }
 
-  Widget get currentChild => Items.pages[currentIndex];
+  Widget get currentChild => Items.pages[_currentRole().index][currentIndex];
 
   List<BottomNavigationBarItem> get buttoms => Items.buttons;
 
   bool get isLoading => _isLoading.value;
-
+  Role get role => _currentRole.value;
   int get currentIndex => _currentIndex.value;
 
   void changePage(int value) =>
