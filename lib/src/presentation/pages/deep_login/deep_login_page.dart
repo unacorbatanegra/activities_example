@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
-
 import '../pages.dart';
 import 'deep_login_controller.dart';
 
@@ -11,7 +10,11 @@ class DeepLoginPage extends GetView<DeepLoginController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.isLogged ? Menu() : LoginPage(),
+      () => controller.isLoading
+          ? const SplashPage()
+          : controller.isLogged
+              ? Menu()
+              : LoginPage(),
     );
   }
 }

@@ -8,7 +8,8 @@ export '../utils/utils.dart';
 export './../services/services.dart';
 
 abstract class Domain<T> {
-  FirestoreRepository repository = FirestoreRepository<T>();
+  FirestoreRepository<T> repository = FirestoreRepository<T>();
+  HiveRepository<T> hiveRepository = HiveRepository<T>();
 
   final uuid = Uuid();
 

@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 
 import '../../../domain/domains.dart';
 import '../../../models/models.dart';
+import '../../../services/services.dart';
 import 'extension.dart';
 import 'widgets/items.dart';
+import 'widgets/role_dialog/role_dialog.dart';
 
 class MenuController extends GetxController {
   final conectivity = Connectivity();
@@ -15,7 +17,7 @@ class MenuController extends GetxController {
   final _currentIndex = 0.obs;
   final _isLoading = false.obs;
   final _currentRole = Rx<Role>(Role.organization);
-  
+
   MenuController({
     @required this.userDomain,
   }) : assert(userDomain != null);
@@ -29,6 +31,14 @@ class MenuController extends GetxController {
   void init() async {
     _isLoading(true);
     final user = await userDomain.get(userDomain.currentUserUid);
+    _currentRole(user.role);
+    if (HiveHelper.isFirstRun) {
+      Get.dialog(
+        RoleDialog(),
+        arguments: user?.role,
+        barrierDismissible: false,
+      );
+    }
     print(user?.toJson());
     conectivity.onConnectivityChanged.listen(
       (result) => result == ConnectivityResult.none

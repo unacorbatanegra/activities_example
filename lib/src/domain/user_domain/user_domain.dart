@@ -7,7 +7,9 @@ class UserDomain extends Domain<User> {
       Collections.users,
       key,
     );
-
+    if (user.uid == currentUserUid) {
+      hiveRepository.put('user', 'currentUser', user);
+    }
     return user;
   }
 
@@ -16,6 +18,8 @@ class UserDomain extends Domain<User> {
     final doc = await collection.doc(uuid).get();
     return doc.exists;
   }
+
+  User get currentUser => hiveRepository.get('user', 'currentUser');
 
   Future<void> put(User user) async {
     return await repository.put(
