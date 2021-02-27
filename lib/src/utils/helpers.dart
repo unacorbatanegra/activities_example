@@ -16,7 +16,7 @@ abstract class Helpers {
   }
 
   static String formatDate(DateTime dateTime) =>
-      DateFormat.yMMMMd('es_AR').format(dateTime);
+      DateFormat.yMd('es_AR').format(dateTime);
 
 
   static String capitalize(String s) {

@@ -18,7 +18,7 @@ mixin CustomRouter {
     ),
     GetPage(
       name: RouteName.activitieVolunter,
-      page: () => ActivitiesVolunterPage(),
+      page: () => ActivitieVolunterPage(),
       binding: ActivitieVolunterBinding(),
     ),
   ];

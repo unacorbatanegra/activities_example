@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../widgets/widgets.dart';
-
-
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   final TextEditingController controller;
   final VoidCallback changeSearching;
-  final bool isSearching;
+  final RxBool isSearching;
   final FocusNode focusNode;
   final ValueChanged<String> onChanged;
 
@@ -23,34 +22,40 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: isSearching
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: TextField(
-                focusNode: focusNode,
-                controller: controller,
-                onChanged: onChanged,
-                style: const TextStyle(
-                  color: Palette.accent,
-                  fontFamily: 'Lato',
+      title: ObxValue<RxBool>(
+        (isSearching) => isSearching()
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: TextField(
+                  focusNode: focusNode,
+                  controller: controller,
+                  onChanged: onChanged,
+                  style: const TextStyle(
+                    color: Palette.accent,
+                    fontFamily: 'Lato',
+                  ),
+                  decoration: const InputDecoration(
+                    alignLabelWithHint: true,
+                    hintText: 'search activities...',
+                  ),
                 ),
-                decoration: const InputDecoration(
-                  alignLabelWithHint: true,
-                  hintText: 'search activities...',
-                ),
-              ),
-            )
-          : const Text('Activities'),
+              )
+            : const Text('Activities'),
+        isSearching,
+      ),
       actions: [
-        IconButton(
-          icon: isSearching
-              ? const Icon(
-                  Icons.close,
-                )
-              : const Icon(
-                  Icons.search,
-                ),
-          onPressed: changeSearching,
+        ObxValue<RxBool>(
+          (isSearching) => IconButton(
+            icon: isSearching()
+                ? const Icon(
+                    Icons.close,
+                  )
+                : const Icon(
+                    Icons.search,
+                  ),
+            onPressed: changeSearching,
+          ),
+          isSearching,
         )
       ],
     );

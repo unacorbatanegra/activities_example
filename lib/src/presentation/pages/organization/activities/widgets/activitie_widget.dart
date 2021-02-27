@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../models/models.dart';
+import '../../../../../utils/utils.dart';
 
 class ActivitieWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -25,16 +26,33 @@ class ActivitieWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              '${activitie.name}',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 60,
+                  child: Text(
+                    '${activitie.name}',
+                    overflow: TextOverflow.visible,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 40,
+                  child: Text(
+                    Helpers.formatDate(activitie.date),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 8.0),
-            Text('${activitie.date}'),
+            Text(activitie.description),
           ],
         ),
       ),

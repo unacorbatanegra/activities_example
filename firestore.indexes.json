@@ -1,0 +1,19 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "activities",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "organization.uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "searchName",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

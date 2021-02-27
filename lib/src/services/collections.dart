@@ -1,4 +1,4 @@
 mixin Collections {
   static const users = 'users';
-  static const activities = 'customers';
+  static const activities = 'activities';
 }

@@ -11,9 +11,10 @@ abstract class DialogHelper {
         title: Text(
           'INFORMATION',
           style: Get.textTheme.subtitle1.copyWith(
-              fontSize: 20,
-              color: Get.theme.primaryColor,
-              fontWeight: FontWeight.bold),
+            fontSize: 20,
+            color: Get.theme.accentColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         content: Text(mensaje),
         actions: <Widget>[

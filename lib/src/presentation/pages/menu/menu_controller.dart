@@ -33,11 +33,11 @@ class MenuController extends GetxController {
     final user = await userDomain.get(userDomain.currentUserUid);
     _currentRole(user.role);
     if (HiveHelper.isFirstRun) {
-      Get.dialog(
+      final result = await Get.dialog(
         RoleDialog(),
-        arguments: user?.role,
         barrierDismissible: false,
-      );
+      ) as bool;
+      if (result ?? false) {}
     }
     print(user?.toJson());
     conectivity.onConnectivityChanged.listen(
@@ -51,6 +51,10 @@ class MenuController extends GetxController {
           : Get.hideSnackBar(),
     );
     _isLoading(false);
+  }
+
+  void refreshRole() {
+    _currentRole(userDomain.currentUser.role);
   }
 
   Widget get currentChild => Items.pages[_currentRole().index][currentIndex];

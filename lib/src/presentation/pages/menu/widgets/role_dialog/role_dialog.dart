@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../domain/domains.dart';
+import '../../../../../models/models.dart';
 import 'role_controller.dart';
+import 'widgets/role_widget.dart';
 
 class RoleDialog extends StatelessWidget {
   const RoleDialog({Key key}) : super(key: key);
@@ -9,7 +12,7 @@ class RoleDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: RoleController(),
+      init: RoleController(domain: UserDomain()),
       builder: (_) => _RoleDialog(),
     );
   }
@@ -22,13 +25,69 @@ class _RoleDialog extends GetView<RoleController> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'INFORMATION',
+        'SELECT ROLE',
         style: Get.textTheme.subtitle1.copyWith(
-            fontSize: 20,
-            color: Get.theme.primaryColor,
-            fontWeight: FontWeight.bold),
+          fontSize: 20,
+          color: Get.theme.accentColor,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      content: Text('asda'),
+      content: Container(
+        width: Get.width,
+        height: 150,
+        child: Obx(
+          () => controller.isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: RoleWidget(
+                        label: 'Organization',
+                        onSelected: controller.role,
+                        value: Role.organization,
+                        selectedValue: controller.role(),
+                        iconData: Icons.business,
+                      ),
+                    ),
+                    Expanded(
+                      child: RoleWidget(
+                        label: 'Volunter',
+                        onSelected: controller.role,
+                        value: Role.volunter,
+                        selectedValue: controller.role(),
+                        iconData: Icons.people,
+                      ),
+                    ),
+                  ],
+                ),
+        ),
+      ),
+      actions: [
+        FlatButton(
+          child: Text(
+            'CANCEL',
+            style: Get.textTheme.button.copyWith(
+              color: Get.theme.accentColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () => Get.back(result: false),
+        ),
+        FlatButton(
+          child: Text(
+            'ACCEPT',
+            style: Get.textTheme.button.copyWith(
+              color: Get.theme.accentColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: controller.onAccept,
+        )
+      ],
     );
   }
 }

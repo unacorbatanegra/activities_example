@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../domain.dart';
+import '../domains.dart';
 
 class ActivitieDomain extends Domain<Activitie> {
   DocumentSnapshot lastDocument;
   int lastLength;
+
+  UserDomain userDomain = UserDomain();
 
   Future<List<Activitie>> getList({
     bool startAfterTheLastDocument = false,
@@ -99,6 +102,7 @@ class ActivitieDomain extends Domain<Activitie> {
 
   Future<void> put(Activitie activitie) async {
     activitie.uuid ??= uidV1;
+    activitie.organization ??= userDomain.currentUser;
     return repository.put(
       data: activitie.toJson(),
       collection: Collections.activities,

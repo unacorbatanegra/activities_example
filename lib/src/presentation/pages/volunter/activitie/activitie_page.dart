@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 import 'activitie_controller.dart';
 
-class ActivitiePage extends GetView<ActivitieVolunterController> {
-  const ActivitiePage({Key key}) : super(key: key);
+class ActivitieVolunterPage extends GetView<ActivitieVolunterController> {
+  const ActivitieVolunterPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +14,6 @@ class ActivitiePage extends GetView<ActivitieVolunterController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Activitie'),
-        actions: [
-          Obx(
-            () => controller.isEditing
-                ? IconButton(
-                    icon: const Icon(Icons.delete_forever),
-                    onPressed: controller.delete,
-                  )
-                : const SizedBox.shrink(),
-          )
-        ],
-      ),
-      bottomNavigationBar: CustomButton(
-        onPressed: controller.accept,
-        label: 'Save changes',
       ),
       body: Obx(
         () => controller.isLoading
@@ -35,21 +22,70 @@ class ActivitiePage extends GetView<ActivitieVolunterController> {
                 margin: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       gap18,
-                      CustomTextField(
-                        controller: controller.nameController,
-                        label: 'Name',
-                        hint: 'activitie name',
-                        validator: controller.validator,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            flex: 60,
+                            child: Text(
+                              '${controller.activitie.name}',
+                              overflow: TextOverflow.visible,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                            flex: 40,
+                            child: Text(
+                              Helpers.formatDate(controller.activitie.date),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
+                        ],
                       ),
                       gap18,
-                      CustomTextField(
-                        controller: controller.description,
-                        label: 'Description',
-                        hint: 'description',
-                        validator: controller.validator,
+                      const Divider(),
+                      Text(controller.activitie.description),
+                      gap18,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Activities',
+                            style: TextStyle(
+                              fontFamily: 'Lato',
+                              fontSize: 18.0,
+                            ),
+                          ),
+                          Text(
+                            '( ${controller.activitie.activities.length} )',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Palette.accent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
+                      const Divider(),
+                      gap18,
+                      ...controller.activitie.activities
+                          .map(
+                            (e) => ListTile(
+                              leading: const Icon(Icons.view_list),
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(e),
+                            ),
+                          )
+                          .toList(),
                       gap18,
                     ],
                   ),

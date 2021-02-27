@@ -1,4 +1,5 @@
 import 'package:get/instance_manager.dart';
+
 import '../../../../domain/domains.dart';
 import 'activitie_controller.dart';
 

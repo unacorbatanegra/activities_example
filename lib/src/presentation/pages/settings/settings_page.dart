@@ -32,10 +32,15 @@ class _SettingsPage extends GetView<SettingsController> {
           child: Column(
             children: [
               ListTile(
+                leading: const Icon(Icons.unfold_more),
+                title: const Text('Change role'),
+                onTap: controller.changeRole,
+              ),
+              ListTile(
                 leading: const Icon(Icons.logout),
                 title: const Text('log out'),
                 onTap: controller.logOut,
-              )
+              ),
             ],
           ),
         ),

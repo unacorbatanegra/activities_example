@@ -6,7 +6,8 @@ import '../../../../models/models.dart';
 import '../../../../services/services.dart';
 import '../../../../utils/utils.dart';
 
-class ActivitiesVolunterController extends GetxController {
+class ActivitiesVolunterController extends GetxController
+    with StateMixin<List<Activitie>> {
   final ActivitieDomain domain;
 
   ScrollController scrollController;
@@ -19,8 +20,8 @@ class ActivitiesVolunterController extends GetxController {
   final list = <Activitie>[].obs;
 
   var _isCharging = false;
-  final _isLoading = false.obs;
-  final _isSearching = false.obs;
+
+  final isSearching = false.obs;
   FocusNode focusNode;
   final debouncer = Debouncer(milliseconds: 500);
 
@@ -35,6 +36,14 @@ class ActivitiesVolunterController extends GetxController {
     super.onInit();
   }
 
+  void init() async {
+    change(null, status: RxStatus.loading());
+    domain.clearPagination();
+    final result = await domain.getListQuery();
+    list(result);
+    change(list, status: RxStatus.success());
+  }
+
   void onTextSearchChanged(String value) async {
     debouncer.run(
       () => filter(value),
@@ -43,9 +52,11 @@ class ActivitiesVolunterController extends GetxController {
 
   void filter(String value) async {
     domain.clearPagination();
-    _isLoading(true);
-    list.assignAll(await domain.getListOrg(name: value));
-    _isLoading(false);
+    change(null, status: RxStatus.loading());
+    domain.clearPagination();
+    final result = await domain.getListQuery(name: value);
+    list(result);
+    change(list, status: RxStatus.success());
   }
 
   void onScroll() async {
@@ -53,36 +64,27 @@ class ActivitiesVolunterController extends GetxController {
     final currentScroll = scrollController.position.pixels;
     if (maxScroll - currentScroll <= Get.height * .20 && !_isCharging) {
       _isCharging = true;
-      list.addAll(await domain.getListOrg(startAfterTheLastDocument: true));
+      final result = await domain.getListQuery(
+        startAfterTheLastDocument: true,
+        name: controller.text,
+      );
+      list.addAll(result);
+      change(list, status: RxStatus.success());
       _isCharging = false;
     }
   }
 
   void focusListener() {
-    _isSearching.value = focusNode.hasFocus;
+    isSearching.value = focusNode.hasFocus;
     if (!focusNode.hasFocus) {
       controller.text = '';
       init();
     }
   }
 
-  void init() async {
-    _isLoading(true);
-    domain.clearPagination();
-    list.assignAll(await domain.getListOrg());
-    _isLoading(false);
-  }
-
-  void onAdd() async {
-    final result = await Get.toNamed(
-      RouteName.activitieOrganization,
-    ) as bool;
-    if (result ?? false) init();
-  }
-
   void onTap(int index) async {
     final result = await Get.toNamed(
-      RouteName.activitieOrganization,
+      RouteName.activitieVolunter,
       arguments: list[index],
     ) as bool;
     print(result);
@@ -90,13 +92,10 @@ class ActivitiesVolunterController extends GetxController {
   }
 
   bool changeSearching() {
-    _isSearching.value = !isSearching;
+    isSearching.value = !isSearching();
     focusNode.requestFocus();
-    return _isSearching.value;
+    return isSearching.value;
   }
-
-  bool get isLoading => _isLoading.value;
-  bool get isSearching => _isSearching.value;
 
   @override
   void onClose() {

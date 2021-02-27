@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grouped_list/grouped_list.dart';
 
 import '../../../../domain/domains.dart';
+import '../../../../models/models.dart';
 import 'activities_controller.dart';
 import 'widgets/activitie_widget.dart';
 import 'widgets/custom_app_bar.dart';
+import 'widgets/organization_widget.dart';
 
 class ActivitiesVolunterPage extends StatelessWidget {
   const ActivitiesVolunterPage({Key key}) : super(key: key);
@@ -28,43 +31,36 @@ class _ActivitiesVolunterPage extends GetView<ActivitiesVolunterController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => controller.changeSearching(),
-      child: Obx(
-        () => Scaffold(
-          appBar: CustomAppBar(
-            focusNode: controller.focusNode,
-            controller: controller.controller,
-            onChanged: controller.onTextSearchChanged,
-            changeSearching: controller.changeSearching,
-            isSearching: controller.isSearching,
-          ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: controller.onAdd,
-            label: const Text('Add activitie'),
-            icon: const Icon(Icons.note_add),
-          ),
-          backgroundColor: Colors.grey[200],
-          body: controller.isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : controller.list.isNotEmpty
-                  ? Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 12.0),
-                      child: CupertinoScrollbar(
-                        child: ListView.separated(
-                          separatorBuilder: (context, _) =>
-                              const SizedBox(height: 8.0),
-                          controller: controller.scrollController,
-                          itemCount: controller.list.length,
-                          itemBuilder: (context, index) => ActivitieWidget(
-                            activitie: controller.list[index],
-                            onTap: () => controller.onTap(index),
-                          ),
-                        ),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          focusNode: controller.focusNode,
+          controller: controller.controller,
+          onChanged: controller.onTextSearchChanged,
+          changeSearching: controller.changeSearching,
+          isSearching: controller.isSearching,
+        ),
+        backgroundColor: Colors.grey[200],
+        body: controller.obx(
+          (list) => list.isNotEmpty
+              ? Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 12.0,
+                  ),
+                  child: CupertinoScrollbar(
+                    child: GroupedListView<Activitie, String>(
+                      elements: list,
+                      indexedItemBuilder: (context, e, index) =>
+                          ActivitieWidget(
+                        onTap: () => controller.onTap(index),
+                        activitie: e,
                       ),
-                    )
-                  : const Center(
-                      child: Text('No data found :('),
+                      groupBy: (e) => e.organization.uid,
+                      groupHeaderBuilder: (value) => OrganizationWidget(value),
                     ),
+                  ),
+                )
+              : const Center(child: Text('No activities yet')),
         ),
       ),
     );

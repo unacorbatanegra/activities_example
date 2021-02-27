@@ -22,6 +22,9 @@ class UserDomain extends Domain<User> {
   User get currentUser => hiveRepository.get('user', 'currentUser');
 
   Future<void> put(User user) async {
+    if (user.uid == currentUserUid) {
+      hiveRepository.put('user', 'currentUser', user);
+    }
     return await repository.put(
       data: user.toJson(),
       collection: Collections.users,

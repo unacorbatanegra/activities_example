@@ -27,7 +27,8 @@ dependencies:
   flutter_svg: any
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
-
+  grouped_list: ^3.7.1
+  
 dev_dependencies:
   mockito: any
   pedantic: ^1.9.0
