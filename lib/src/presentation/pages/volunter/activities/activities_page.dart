@@ -17,7 +17,7 @@ class ActivitiesVolunterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder(
       init: ActivitiesVolunterController(
-        domain: ActivitieDomain(),
+        domain: ActivityDomain(),
       ),
       builder: (_) => _ActivitiesVolunterPage(),
     );
@@ -48,7 +48,7 @@ class _ActivitiesVolunterPage extends GetView<ActivitiesVolunterController> {
                     vertical: 12.0,
                   ),
                   child: CupertinoScrollbar(
-                    child: GroupedListView<Activitie, String>(
+                    child: GroupedListView<Activity, String>(
                       elements: list,
                       indexedItemBuilder: (context, e, index) =>
                           ActivitieWidget(

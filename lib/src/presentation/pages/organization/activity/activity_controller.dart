@@ -5,10 +5,10 @@ import '../../../../domain/domains.dart';
 import '../../../../models/models.dart';
 import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
-import 'widgets/activitie_dialog.dart';
+import 'widgets/activity_dialog.dart';
 
-class ActivitieOrganizationController extends GetxController {
-  final ActivitieDomain domain;
+class ActivityOrganizationController extends GetxController {
+  final ActivityDomain domain;
 
   final formKey = GlobalKey<FormState>();
 
@@ -16,11 +16,11 @@ class ActivitieOrganizationController extends GetxController {
   TextEditingController description;
   final activities = <String>[].obs;
   final _date = Rx<DateTime>();
-  Activitie activitie;
+  Activity activity;
   final _isEditing = false.obs;
   final _isLoading = false.obs;
 
-  ActivitieOrganizationController({@required this.domain});
+  ActivityOrganizationController({@required this.domain});
 
   @override
   void onInit() {
@@ -33,10 +33,10 @@ class ActivitieOrganizationController extends GetxController {
 
   void delete() async {
     if (!await DialogHelper.ifDialog('''
-Are you sure do you wanna delete this activitie, this action cannot undone''')) {
+Are you sure do you wanna delete this activitt, this action cannot undone''')) {
       return;
     }
-    await domain.delete(activitie.uuid);
+    await domain.delete(activity.uuid);
     Get.back(result: true);
   }
 
@@ -62,12 +62,12 @@ Are you sure do you wanna delete this activitie, this action cannot undone''')) 
     }
     Get.dialog(ProcessingDialog);
     await domain.put(
-      Activitie(
-        uuid: activitie?.uuid,
+      Activity(
+        uuid: activity?.uuid,
         name: nameController.text,
         description: description.text,
         activities: activities,
-        organization: activitie?.organization,
+        organization: activity?.organization,
         date: date,
       ),
     );
@@ -80,13 +80,13 @@ Are you sure do you wanna delete this activitie, this action cannot undone''')) 
 
   void init() async {
     _isLoading(true);
-    activitie = Get.arguments as Activitie;
-    _isEditing.value = activitie != null;
+    activity = Get.arguments as Activity;
+    _isEditing.value = activity != null;
     if (isEditing) {
-      nameController.text = activitie.name;
-      description.text = activitie.description;
-      _date.value = activitie.date;
-      activities.assignAll(activitie.activities);
+      nameController.text = activity.name;
+      description.text = activity.description;
+      _date.value = activity.date;
+      activities.assignAll(activity.activities);
     }
     _isLoading(false);
   }
@@ -95,7 +95,7 @@ Are you sure do you wanna delete this activitie, this action cannot undone''')) 
 
   void onTap(int idx) async {
     final result = await Get.dialog(
-      ActivitieDialog(),
+      ActivityDialog(),
       barrierDismissible: false,
       arguments: activities[idx],
     ) as String;
@@ -105,7 +105,7 @@ Are you sure do you wanna delete this activitie, this action cannot undone''')) 
 
   void onAdd() async {
     final result = await Get.dialog(
-      ActivitieDialog(),
+      ActivityDialog(),
       barrierDismissible: false,
     ) as String;
     if (result == null) return;

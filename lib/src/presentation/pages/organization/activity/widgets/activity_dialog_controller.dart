@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ActivitieDialogController extends GetxController {
+class ActivityDialogController extends GetxController {
   final formKey = GlobalKey<FormState>();
   TextEditingController controller;
 

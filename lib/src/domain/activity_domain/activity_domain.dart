@@ -3,27 +3,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../domain.dart';
 import '../domains.dart';
 
-class ActivitieDomain extends Domain<Activitie> {
+class ActivityDomain extends Domain<Activity> {
   DocumentSnapshot lastDocument;
   int lastLength;
 
   UserDomain userDomain = UserDomain();
 
-  Future<List<Activitie>> getList({
+  Future<List<Activity>> getList({
     bool startAfterTheLastDocument = false,
   }) =>
       repository.getList(
-        (_) => Activitie.fromJson(_),
+        (_) => Activity.fromJson(_),
         Collections.activities,
         startAfterTheLastDocument: startAfterTheLastDocument,
       );
 
-  Future<List<Activitie>> getListQuery({
+  Future<List<Activity>> getListQuery({
     int limit = 20,
     bool startAfterTheLastDocument = false,
     String name,
   }) async {
-    var list = <Activitie>[];
+    var list = <Activity>[];
     if (lastLength != null && lastLength % limit != 0) return list;
     final collection = repository.getFromCollection(Collections.activities);
     var ref = collection.limit(limit);
@@ -48,7 +48,7 @@ class ActivitieDomain extends Domain<Activitie> {
       lastDocument = documents.docs.last;
       lastLength = documents.docs.length;
       list = repository.getFromDocuments(
-        (_) => Activitie.fromJson(_),
+        (_) => Activity.fromJson(_),
         documents.docs,
       );
     }
@@ -56,12 +56,12 @@ class ActivitieDomain extends Domain<Activitie> {
     return list;
   }
 
-  Future<List<Activitie>> getListOrg({
+  Future<List<Activity>> getListOrg({
     int limit = 20,
     bool startAfterTheLastDocument = false,
     String name,
   }) async {
-    var list = <Activitie>[];
+    var list = <Activity>[];
     if (lastLength != null && lastLength % limit != 0) return list;
     final collection = repository.getFromCollection(Collections.activities);
 
@@ -92,7 +92,7 @@ class ActivitieDomain extends Domain<Activitie> {
       lastDocument = documents.docs.last;
       lastLength = documents.docs.length;
       list = repository.getFromDocuments(
-        (_) => Activitie.fromJson(_),
+        (_) => Activity.fromJson(_),
         documents.docs,
       );
     }
@@ -100,13 +100,13 @@ class ActivitieDomain extends Domain<Activitie> {
     return list;
   }
 
-  Future<void> put(Activitie activitie) async {
-    activitie.uuid ??= uidV1;
-    activitie.organization ??= userDomain.currentUser;
+  Future<void> put(Activity activity) async {
+    activity.uuid ??= uidV1;
+    activity.organization ??= userDomain.currentUser;
     return repository.put(
-      data: activitie.toJson(),
+      data: activity.toJson(),
       collection: Collections.activities,
-      uuid: activitie.uuid,
+      uuid: activity.uuid,
     );
   }
 

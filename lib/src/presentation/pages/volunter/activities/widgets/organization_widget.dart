@@ -4,7 +4,7 @@ import '../../../../../models/models.dart';
 import '../../../../widgets/widgets.dart';
 
 class OrganizationWidget extends StatelessWidget {
-  final Activitie activitie;
+  final Activity activitie;
   const OrganizationWidget(
     this.activitie, {
     Key key,

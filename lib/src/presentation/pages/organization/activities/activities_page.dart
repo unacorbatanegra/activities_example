@@ -14,7 +14,7 @@ class ActivitiesOrganizationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder(
       init: ActivitiesOrganizationController(
-        domain: ActivitieDomain(),
+        domain: ActivityDomain(),
       ),
       builder: (_) => _ActivitiesOrganizationPage(),
     );
@@ -40,7 +40,7 @@ class _ActivitiesOrganizationPage
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: controller.onAdd,
-            label: const Text('Add activitie'),
+            label: const Text('Add activity'),
             icon: const Icon(Icons.note_add),
           ),
           backgroundColor: Colors.grey[200],

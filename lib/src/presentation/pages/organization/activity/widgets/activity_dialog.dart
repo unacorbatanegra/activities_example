@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/widgets.dart';
-import 'activitie_dialog_controller.dart';
+import 'activity_dialog_controller.dart';
 
-class ActivitieDialog extends StatelessWidget {
-  const ActivitieDialog({Key key}) : super(key: key);
+class ActivityDialog extends StatelessWidget {
+  const ActivityDialog({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: ActivitieDialogController(),
-      builder: (_) => _ActivitieDialog(),
+      init: ActivityDialogController(),
+      builder: (_) => _ActivityDialog(),
     );
   }
 }
 
-class _ActivitieDialog extends GetView<ActivitieDialogController> {
-  const _ActivitieDialog({Key key}) : super(key: key);
+class _ActivityDialog extends GetView<ActivityDialogController> {
+  const _ActivityDialog({Key key}) : super(key: key);
   static final _border = OutlineInputBorder(
     borderRadius: BorderRadius.circular(4.0),
     borderSide: BorderSide(
@@ -28,7 +28,7 @@ class _ActivitieDialog extends GetView<ActivitieDialogController> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'ACTIVITIE',
+        'ACTIVITY',
         style: Get.textTheme.headline6.copyWith(
           color: Palette.accent,
           fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class _ActivitieDialog extends GetView<ActivitieDialogController> {
                 ),
               ),
               contentPadding: const EdgeInsets.all(18.0),
-              hintText: 'activitie',
+              hintText: 'activity',
               hintStyle: const TextStyle(color: Colors.grey),
             ),
           ),

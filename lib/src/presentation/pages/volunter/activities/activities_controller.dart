@@ -7,8 +7,8 @@ import '../../../../services/services.dart';
 import '../../../../utils/utils.dart';
 
 class ActivitiesVolunterController extends GetxController
-    with StateMixin<List<Activitie>> {
-  final ActivitieDomain domain;
+    with StateMixin<List<Activity>> {
+  final ActivityDomain domain;
 
   ScrollController scrollController;
   TextEditingController controller;
@@ -17,7 +17,7 @@ class ActivitiesVolunterController extends GetxController
     @required this.domain,
   });
 
-  final list = <Activitie>[].obs;
+  final list = <Activity>[].obs;
 
   var _isCharging = false;
 
@@ -84,7 +84,7 @@ class ActivitiesVolunterController extends GetxController
 
   void onTap(int index) async {
     final result = await Get.toNamed(
-      RouteName.activitieVolunter,
+      RouteName.activityVolunter,
       arguments: list[index],
     ) as bool;
     print(result);

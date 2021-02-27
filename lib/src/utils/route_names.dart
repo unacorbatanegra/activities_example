@@ -1,6 +1,6 @@
 abstract class RouteName {
   static const main = '/';
-  static const activitieOrganization = '/actitivieOrganization';
-  static const activitieVolunter = '/actitivieVolunter';
+  static const activityOrganization = '/actitivyOrganization';
+  static const activityVolunter = '/actitivyVolunter';
   static const activities = '/actitivies';
 }

@@ -1,6 +1,6 @@
 import '../models.dart';
 
-class Activitie {
+class Activity {
   String uuid;
   String name;
   String description;
@@ -8,7 +8,7 @@ class Activitie {
   DateTime date;
   List<String> activities;
 
-  Activitie({
+  Activity({
     this.uuid,
     this.date,
     this.description,
@@ -27,9 +27,9 @@ class Activitie {
         'searchName': name.toLowerCase(),
       };
 
-  factory Activitie.fromJson(Map<String, dynamic> json) {
+  factory Activity.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
-    return Activitie(
+    return Activity(
       date: DateTime.fromMillisecondsSinceEpoch(json['date'] as int),
       name: json['name'] as String,
       uuid: json['uuid'] as String,

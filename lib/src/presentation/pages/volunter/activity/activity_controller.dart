@@ -2,12 +2,10 @@ import 'package:get/get.dart';
 
 import '../../../../models/models.dart';
 
-class ActivitieVolunterController extends GetxController {
-  final _activitie = Rx<Activitie>();
+class ActivityVolunterController extends GetxController {
+  final _activity = Rx<Activity>();
 
   final _isLoading = false.obs;
-
-  ActivitieVolunterController();
 
   @override
   void onInit() {
@@ -17,11 +15,11 @@ class ActivitieVolunterController extends GetxController {
 
   void init() {
     _isLoading(true);
-    _activitie(Get.arguments as Activitie);
+    _activity(Get.arguments as Activity);
     _isLoading(false);
   }
 
-  Activitie get activitie => _activitie.value;
+  Activity get activity => _activity.value;
 
   bool get isLoading => _isLoading.value;
 }

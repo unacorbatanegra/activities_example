@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/widgets.dart';
-import 'activitie_controller.dart';
+import 'activity_controller.dart';
 
-class ActivitieOrganizationPage
-    extends GetView<ActivitieOrganizationController> {
-  const ActivitieOrganizationPage({Key key}) : super(key: key);
+
+class ActivityOrganizationPage
+    extends GetView<ActivityOrganizationController> {
+  const ActivityOrganizationPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const gap18 = SizedBox(height: 18.0);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Activitie'),
+        title: const Text('Activity'),
         actions: [
           Obx(
             () => Visibility(
@@ -45,7 +46,7 @@ class ActivitieOrganizationPage
                         CustomTextField(
                           controller: controller.nameController,
                           label: 'Name',
-                          hint: 'activitie name',
+                          hint: 'activity name',
                           validator: controller.validator,
                         ),
                         gap18,
@@ -107,7 +108,7 @@ class ActivitieOrganizationPage
                           child: TextButton.icon(
                             onPressed: controller.onAdd,
                             icon: const Icon(Icons.note_add),
-                            label: Text('add activitie'),
+                            label: Text('add activity'),
                           ),
                         )
                       ],

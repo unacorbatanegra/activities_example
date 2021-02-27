@@ -12,14 +12,14 @@ mixin CustomRouter {
       binding: DeepLoginBinding(),
     ),
     GetPage(
-      name: RouteName.activitieOrganization,
-      page: () => ActivitieOrganizationPage(),
-      binding: ActivitieOrganizationBinding(),
+      name: RouteName.activityOrganization,
+      page: () => ActivityOrganizationPage(),
+      binding: ActivityOrganizationBinding(),
     ),
     GetPage(
-      name: RouteName.activitieVolunter,
-      page: () => ActivitieVolunterPage(),
-      binding: ActivitieVolunterBinding(),
+      name: RouteName.activityVolunter,
+      page: () => ActivityVolunterPage(),
+      binding: ActivityVolunterBinding(),
     ),
   ];
 }

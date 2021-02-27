@@ -7,7 +7,7 @@ import '../../../../services/services.dart';
 import '../../../../utils/utils.dart';
 
 class ActivitiesOrganizationController extends GetxController {
-  final ActivitieDomain domain;
+  final ActivityDomain domain;
 
   ScrollController scrollController;
   TextEditingController controller;
@@ -16,7 +16,7 @@ class ActivitiesOrganizationController extends GetxController {
     @required this.domain,
   });
 
-  final list = <Activitie>[].obs;
+  final list = <Activity>[].obs;
 
   var _isCharging = false;
   final _isLoading = false.obs;
@@ -75,14 +75,14 @@ class ActivitiesOrganizationController extends GetxController {
 
   void onAdd() async {
     final result = await Get.toNamed(
-      RouteName.activitieOrganization,
+      RouteName.activityOrganization,
     ) as bool;
     if (result ?? false) init();
   }
 
   void onTap(int index) async {
     final result = await Get.toNamed(
-      RouteName.activitieOrganization,
+      RouteName.activityOrganization,
       arguments: list[index],
     ) as bool;
     print(result);

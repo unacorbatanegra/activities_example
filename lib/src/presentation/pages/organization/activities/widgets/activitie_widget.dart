@@ -5,7 +5,7 @@ import '../../../../../utils/utils.dart';
 
 class ActivitieWidget extends StatelessWidget {
   final VoidCallback onTap;
-  final Activitie activitie;
+  final Activity activitie;
   const ActivitieWidget({
     Key key,
     @required this.onTap,
