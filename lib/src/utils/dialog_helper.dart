@@ -51,7 +51,7 @@ abstract class DialogHelper {
             'INFORMATION',
             style: Get.textTheme.subtitle1.copyWith(
               fontSize: 20,
-              color: Get.theme.primaryColor,
+              color: Get.theme.accentColor,
               fontWeight: FontWeight.bold,
             ),
           ),

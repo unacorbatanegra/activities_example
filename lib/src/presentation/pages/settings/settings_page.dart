@@ -36,10 +36,18 @@ class _SettingsPage extends GetView<SettingsController> {
                 title: const Text('Change role'),
                 onTap: controller.changeRole,
               ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('log out'),
-                onTap: controller.logOut,
+              Obx(
+                () => controller.isAnonymous
+                    ? ListTile(
+                        leading: const Icon(Icons.login),
+                        title: const Text('login'),
+                        onTap: controller.logOut,
+                      )
+                    : ListTile(
+                        leading: const Icon(Icons.logout),
+                        title: const Text('log out'),
+                        onTap: controller.logOut,
+                      ),
               ),
             ],
           ),

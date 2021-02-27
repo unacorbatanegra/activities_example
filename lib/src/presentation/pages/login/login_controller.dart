@@ -10,5 +10,7 @@ class LoginController extends GetxController {
     @required this.authDomain,
   });
 
-  void login() => authDomain.login();
+  void login() => authDomain.loginGoogle();
+
+  void loginAnonymously() => authDomain.loginAnonymously();
 }

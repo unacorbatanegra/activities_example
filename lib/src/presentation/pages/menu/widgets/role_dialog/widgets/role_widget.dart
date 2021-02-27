@@ -23,7 +23,7 @@ class RoleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final selected = value == selectedValue;
     return InkWell(
-      splashColor: Palette.accent,
+      splashColor: Colors.transparent,
       onTap: () => onSelected(value),
       child: Container(
         margin: const EdgeInsets.all(8.0),

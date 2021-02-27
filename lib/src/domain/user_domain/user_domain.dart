@@ -7,7 +7,7 @@ class UserDomain extends Domain<User> {
       Collections.users,
       key,
     );
-    if (user.uid == currentUserUid) {
+    if (user?.uid == currentUserUid) {
       hiveRepository.put('user', 'currentUser', user);
     }
     return user;

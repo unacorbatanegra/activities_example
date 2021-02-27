@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../insfrastructure/hive_setting.dart';
 import '../../models/models.dart';
 import '../domain.dart';
 import '../domains.dart';
 
 class AuthDomain extends Domain<User> {
-  
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   GoogleSignIn googleSignIn = GoogleSignIn.standard();
 
   UserDomain userDomain = UserDomain();
 
-  Future<void> login() async {
+  Future<void> loginGoogle() async {
     await signOut();
     final result = await googleSignIn.signIn();
     if (result == null) return;
@@ -24,8 +24,18 @@ class AuthDomain extends Domain<User> {
     await _signIn(credential);
   }
 
+  Future<void> loginAnonymously() async {
+    await signOut();
+    final result = await firebaseAuth.signInAnonymously();
+    if (result == null) return;
+
+    print(result.user.displayName);
+    HiveHelperSettings.put('isAnonymous', result.user.isAnonymous);
+  }
+
   Future<void> _signIn(OAuthCredential credential) async {
     final userCredential = await firebaseAuth.signInWithCredential(credential);
+    HiveHelperSettings.put('isAnonymous', userCredential.user.isAnonymous);
     if (!await checkExistUser(userCredential.user.uid)) {
       final user = userCredential.user;
       await userDomain.put(

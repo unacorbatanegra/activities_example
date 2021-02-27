@@ -32,7 +32,7 @@ class _LoginPage extends GetView<LoginController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                'Firebase CRUD\nExample',
+                'Activities',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 36.0,
@@ -43,6 +43,12 @@ class _LoginPage extends GetView<LoginController> {
               Button(
                 onTap: controller.login,
                 label: 'login with google',
+              ),
+              const SizedBox(height: 18.0),
+              Button(
+                child: const Icon(Icons.person),
+                onTap: controller.loginAnonymously,
+                label: 'login anonymously',
               )
             ],
           ),

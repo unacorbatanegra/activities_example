@@ -7,25 +7,25 @@ part 'user.g.dart';
 @HiveType(typeId: 0)
 class User {
   @HiveField(0)
-   String email;
+  String email;
   @HiveField(1)
-   String user;
+  String user;
   @HiveField(2)
-   String name;
+  String name;
   @HiveField(3)
-   String lastName;
+  String lastName;
   @HiveField(4)
-   String dni;
+  String dni;
   @HiveField(5)
-   String phone;
+  String phone;
   @HiveField(6)
-   String uid;
+  String uid;
   @HiveField(7)
-   String urlImg;
+  String urlImg;
   @HiveField(8)
-   bool block;
+  bool block;
   @HiveField(9)
-   Role role;
+  Role role;
 
   User({
     this.email,
@@ -37,7 +37,7 @@ class User {
     this.uid,
     this.block = false,
     this.urlImg,
-    this.role = Role.volunter,
+    this.role,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -50,7 +50,7 @@ class User {
         uid: json['uid'] as String,
         urlImg: json['urlImg'] as String,
         block: json['block'] as bool,
-        role: Role.values[json['role'] as int],
+        role: json['role'] != null ? Role.values[json['role'] as int] : null,
       );
 
   factory User.fromJsonOrg(Map<String, dynamic> json) => User(
@@ -78,6 +78,6 @@ class User {
         'telefono': phone,
         'uid': uid,
         'block': block,
-        'role': role.index,
+        'role': role?.index,
       };
 }

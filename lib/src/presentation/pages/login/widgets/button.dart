@@ -6,10 +6,12 @@ import '../../../widgets/widgets.dart';
 class Button extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
+  final Widget child;
   const Button({
     Key key,
     @required this.onTap,
     @required this.label,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -29,15 +31,16 @@ class Button extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(width: 6),
-            SvgPicture.asset(
-              "assets/images/google.svg",
-              height: 30,
-              width: 30,
-            ),
+            child ??
+                SvgPicture.asset(
+                  "assets/images/google.svg",
+                  height: 30,
+                  width: 30,
+                ),
             const SizedBox(width: 16),
             Text(
               label,
-              style:const  TextStyle(
+              style: const TextStyle(
                 fontSize: 20.0,
                 color: Palette.accent,
               ),

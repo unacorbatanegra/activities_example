@@ -31,13 +31,15 @@ class MenuController extends GetxController {
   void init() async {
     _isLoading(true);
     final user = await userDomain.get(userDomain.currentUserUid);
-    _currentRole(user.role);
-    if (HiveHelper.isFirstRun) {
+    _currentRole(user?.role ?? Role.volunter);
+    if ((user?.role == null) && !HiveHelper.isAnonymous) {
       final result = await Get.dialog(
         RoleDialog(),
         barrierDismissible: false,
       ) as bool;
-      if (result ?? false) {}
+      if (result ?? false) {
+        refreshRole();
+      }
     }
     print(user?.toJson());
     conectivity.onConnectivityChanged.listen(
