@@ -27,7 +27,6 @@ class AuthDomain extends Domain<User> {
   Future<void> loginAnonymously() async {
     await signOut();
     final result = await firebaseAuth.signInAnonymously();
-    if (result == null) return;
 
     print(result.user!.displayName);
     HiveHelperSettings.put('isAnonymous', result.user!.isAnonymous);

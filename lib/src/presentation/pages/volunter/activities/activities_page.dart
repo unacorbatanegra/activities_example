@@ -43,7 +43,7 @@ class _ActivitiesVolunterPage extends GetView<ActivitiesVolunterController> {
         body: controller.obx(
           ((list) {
             if (list == null || list.isEmpty) {
-              const Center(child: Text('No activities yet'));
+              return const Center(child: Text('No activities yet'));
             }
             return Container(
               margin: const EdgeInsets.symmetric(
@@ -52,7 +52,7 @@ class _ActivitiesVolunterPage extends GetView<ActivitiesVolunterController> {
               ),
               child: CupertinoScrollbar(
                 child: GroupedListView<Activity, String?>(
-                  elements: list!,
+                  elements: list,
                   indexedItemBuilder: (context, e, index) => ActivitieWidget(
                     onTap: () => controller.onTap(index),
                     activitie: e,

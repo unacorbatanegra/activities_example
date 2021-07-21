@@ -9,7 +9,8 @@ mixin HiveHelper {
 
   static bool _isFirstRun() {
     final repository = HiveRepository<dynamic>();
-    final isFirstRun = repository.get('settings', 'isFirstRun') as bool? ?? true;
+    final isFirstRun =
+        repository.get('settings', 'isFirstRun') as bool? ?? true;
     if (isFirstRun) {
       repository.put('settings', 'isFirstRun', false);
     }

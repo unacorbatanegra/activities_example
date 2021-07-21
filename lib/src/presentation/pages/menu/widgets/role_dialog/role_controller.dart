@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:meta/meta.dart';
+
 
 import '../../../../../domain/domains.dart';
 import '../../../../../models/models.dart';

@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:meta/meta.dart';
-
 import '../../../domain/domains.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
