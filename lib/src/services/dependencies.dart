@@ -11,12 +11,13 @@ abstract class Dependencies {
   static Future<void> handleHive() async {
     await Hive.initFlutter();
     Hive.registerAdapter<User>(UserAdapter());
-    Hive.registerAdapter<Role>(RoleAdapter());
-    return Future.wait(
+    Hive.registerAdapter<Role?>(RoleAdapter());
+    await Future.wait(
       [
         Hive.openBox<User>('user'),
         Hive.openBox('settings'),
       ],
     );
+    return;
   }
 }

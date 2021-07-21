@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 final ProcessingDialog = AlertDialog(
   title: Text(
     'INFORMATION',
-    style: Get.textTheme.subtitle1.copyWith(
+    style: Get.textTheme.subtitle1!.copyWith(
       fontSize: 20,
       color: Get.theme.accentColor,
       fontFamily: 'Lato',

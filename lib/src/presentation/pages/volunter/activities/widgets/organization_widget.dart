@@ -7,7 +7,7 @@ class OrganizationWidget extends StatelessWidget {
   final Activity activitie;
   const OrganizationWidget(
     this.activitie, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class OrganizationWidget extends StatelessWidget {
         color: Palette.accent,
       ),
       title: Text(
-        activitie.organization.user,
+        activitie.organization!.user!,
         style: const TextStyle(
           color: Palette.accent,
         ),

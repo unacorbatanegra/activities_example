@@ -7,9 +7,9 @@ class ActivitieWidget extends StatelessWidget {
   final VoidCallback onTap;
   final Activity activitie;
   const ActivitieWidget({
-    Key key,
-    @required this.onTap,
-    @required this.activitie,
+    Key? key,
+    required this.onTap,
+    required this.activitie,
   }) : super(key: key);
 
   @override
@@ -45,14 +45,14 @@ class ActivitieWidget extends StatelessWidget {
                 Flexible(
                   flex: 40,
                   child: Text(
-                    Helpers.formatDate(activitie.date),
+                    Helpers.formatDate(activitie.date!),
                     overflow: TextOverflow.ellipsis,
                   ),
                 )
               ],
             ),
             const SizedBox(height: 8.0),
-            Text(activitie.description),
+            Text(activitie.description!),
           ],
         ),
       ),

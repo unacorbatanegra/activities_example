@@ -7,26 +7,26 @@ import 'role_controller.dart';
 import 'widgets/role_widget.dart';
 
 class RoleDialog extends StatelessWidget {
-  const RoleDialog({Key key}) : super(key: key);
+  const RoleDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
       init: RoleController(domain: UserDomain()),
-      builder: (_) => _RoleDialog(),
+      builder: (dynamic _) => _RoleDialog(),
     );
   }
 }
 
 class _RoleDialog extends GetView<RoleController> {
-  const _RoleDialog({Key key}) : super(key: key);
+  const _RoleDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
         'SELECT ROLE',
-        style: Get.textTheme.subtitle1.copyWith(
+        style: Get.textTheme.subtitle1!.copyWith(
           fontSize: 20,
           color: Get.theme.accentColor,
           fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class _RoleDialog extends GetView<RoleController> {
                     Expanded(
                       child: RoleWidget(
                         label: 'Organization',
-                        onSelected: controller.role,
+                        onSelected: controller.role as void Function(Role),
                         value: Role.organization,
                         selectedValue: controller.role(),
                         iconData: Icons.business,
@@ -56,7 +56,7 @@ class _RoleDialog extends GetView<RoleController> {
                     Expanded(
                       child: RoleWidget(
                         label: 'Volunter',
-                        onSelected: controller.role,
+                        onSelected: controller.role as void Function(Role),
                         value: Role.volunter,
                         selectedValue: controller.role(),
                         iconData: Icons.people,
@@ -67,20 +67,20 @@ class _RoleDialog extends GetView<RoleController> {
         ),
       ),
       actions: [
-        FlatButton(
+        TextButton(
           child: Text(
             'CANCEL',
-            style: Get.textTheme.button.copyWith(
+            style: Get.textTheme.button!.copyWith(
               color: Get.theme.accentColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           onPressed: () => Get.back(result: false),
         ),
-        FlatButton(
+        TextButton(
           child: Text(
             'ACCEPT',
-            style: Get.textTheme.button.copyWith(
+            style: Get.textTheme.button!.copyWith(
               color: Get.theme.accentColor,
               fontWeight: FontWeight.bold,
             ),

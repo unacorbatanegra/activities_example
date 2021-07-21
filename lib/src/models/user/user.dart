@@ -7,25 +7,25 @@ part 'user.g.dart';
 @HiveType(typeId: 0)
 class User {
   @HiveField(0)
-  String email;
+  String? email;
   @HiveField(1)
-  String user;
+  String? user;
   @HiveField(2)
-  String name;
+  String? name;
   @HiveField(3)
-  String lastName;
+  String? lastName;
   @HiveField(4)
-  String dni;
+  String? dni;
   @HiveField(5)
-  String phone;
+  String? phone;
   @HiveField(6)
-  String uid;
+  String? uid;
   @HiveField(7)
-  String urlImg;
+  String? urlImg;
   @HiveField(8)
-  bool block;
+  bool? block;
   @HiveField(9)
-  Role role;
+  Role? role;
 
   User({
     this.email,
@@ -40,25 +40,25 @@ class User {
     this.role,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        email: json['email'] as String,
-        user: json['user'] as String,
-        name: json['name'] as String,
-        lastName: json['lastName'] as String,
-        dni: json['dni'] as String,
-        phone: json['telefono'] as String,
-        uid: json['uid'] as String,
-        urlImg: json['urlImg'] as String,
-        block: json['block'] as bool,
-        role: json['role'] != null ? Role.values[json['role'] as int] : null,
+  static User fromJson(Map<String, dynamic> map) => User(
+        email: map['email'] as String?,
+        user: map['user'] as String?,
+        name: map['name'] as String?,
+        lastName: map['lastName'] as String?,
+        dni: map['dni'] as String?,
+        phone: map['telefono'] as String?,
+        uid: map['uid'] as String?,
+        urlImg: map['urlImg'] as String?,
+        block: map['block'] as bool?,
+        role: map['role'] != null ? Role.values[map['role'] as int] : null,
       );
 
   factory User.fromJsonOrg(Map<String, dynamic> json) => User(
-        urlImg: json['urlImg'] as String,
-        email: json['email'] as String,
-        user: json['user'] as String,
-        name: json['name'] as String,
-        uid: json['uid'] as String,
+        urlImg: json['urlImg'] as String?,
+        email: json['email'] as String?,
+        user: json['user'] as String?,
+        name: json['name'] as String?,
+        uid: json['uid'] as String?,
       );
 
   Map<String, dynamic> toJsonOrg() => {

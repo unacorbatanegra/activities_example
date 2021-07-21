@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import '../../../domain/domains.dart';
 
 class DeepLoginController extends GetxController {
-  final firebaseAuthUser = Rx<User>();
+  final firebaseAuthUser = Rxn<User>();
   final _isLogged = false.obs;
   final _isLoading = false.obs;
-  final AuthDomain authDomain;
+  final AuthDomain? authDomain;
 
   DeepLoginController({this.authDomain});
   @override
@@ -19,7 +19,7 @@ class DeepLoginController extends GetxController {
       (e) async {
         if (e && !isLoading) {
           _isLoading(true);
-          await authDomain.checkExistUser(firebaseAuthUser().uid);
+          await authDomain!.checkExistUser(firebaseAuthUser()!.uid);
           _isLoading(false);
         }
       },

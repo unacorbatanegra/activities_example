@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
@@ -9,16 +8,16 @@ class FirestoreRepository<T> {
 
   final _auth = FirebaseAuth.instance;
 
-  DocumentSnapshot lastDocument;
-  int lastLength;
-  String lastCollection;
+  DocumentSnapshot? lastDocument;
+  int? lastLength;
+  String? lastCollection;
 
-  String get currentUser => _auth.currentUser?.uid;
+  String? get currentUser => _auth.currentUser?.uid;
 
   Future<void> put({
-    @required Map<String, dynamic> data,
-    @required String collection,
-    @required String uuid,
+    required Map<String, dynamic> data,
+    required String collection,
+    required String? uuid,
   }) =>
       db.collection(collection).doc(uuid).set(
             data,
@@ -26,25 +25,25 @@ class FirestoreRepository<T> {
           );
 
   Future<void> update({
-    @required Map<String, dynamic> data,
-    @required String collection,
-    @required String uuid,
+    required Map<String, dynamic> data,
+    required String collection,
+    required String uuid,
   }) =>
       db.collection(collection).doc(uuid).update(
             data,
           );
 
-  Future<List<T>> getList<T>(
+  Future<List<T?>> getList<T>(
     FromJson<T> fromJson,
     String collection, {
     int limit = 20,
-    @required bool startAfterTheLastDocument,
-    dynamic orderBy,
+    required bool startAfterTheLastDocument,
+    Object? orderBy,
     bool descendent = false,
   }) async {
-    final list = <T>[];
+    final list = <T?>[];
     if (lastLength != null &&
-        lastLength % limit != 0 &&
+        lastLength! % limit != 0 &&
         collection == (lastCollection ?? '')) return list;
     final cF = orderBy != null
         ? db
@@ -54,7 +53,7 @@ class FirestoreRepository<T> {
         : db.collection(collection).limit(limit);
 
     final ref = startAfterTheLastDocument && lastDocument != null
-        ? await cF.startAfterDocument(lastDocument).get()
+        ? await cF.startAfterDocument(lastDocument!).get()
         : await cF.get();
 
     if (ref.docs.isNotEmpty) {
@@ -68,23 +67,25 @@ class FirestoreRepository<T> {
 
   List<T> getFromDocuments<T>(
           FromJson<T> fromJson, List<QueryDocumentSnapshot> documents) =>
-      documents.map((e) => fromJson(e.data())).toList();
+      documents.map((e) => fromJson(e.data() as Map<String, dynamic>)).toList();
 
   CollectionReference getFromCollection(String collection) =>
       db.collection(collection);
 
-  Future<T> get<T>(
+  Future<T?> get<T>(
     FromJson<T> fromJson,
     String collection,
-    String uuid,
+    String? uuid,
   ) async {
     final ref = await db.collection(collection).doc(uuid).get();
-    return ref.data() != null ? fromJson(ref.data()) : null;
+    return ref.data() != null
+        ? fromJson(ref.data() as Map<String, dynamic>)
+        : null;
   }
 
   Future<void> delete({
-    @required String uuid,
-    @required String collection,
+    required String? uuid,
+    required String collection,
   }) =>
       db.collection(collection).doc(uuid).delete();
 

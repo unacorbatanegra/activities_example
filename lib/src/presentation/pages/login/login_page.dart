@@ -7,19 +7,19 @@ import 'login_controller.dart';
 import 'widgets/button.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
       init: LoginController(authDomain: AuthDomain()),
-      builder: (_) => _LoginPage(),
+      builder: (dynamic _) => _LoginPage(),
     );
   }
 }
 
 class _LoginPage extends GetView<LoginController> {
-  const _LoginPage({Key key}) : super(key: key);
+  const _LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

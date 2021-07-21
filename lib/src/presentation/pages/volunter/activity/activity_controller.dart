@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../../models/models.dart';
 
 class ActivityVolunterController extends GetxController {
-  final _activity = Rx<Activity>();
+  final _activity = Rxn<Activity>();
 
   final _isLoading = false.obs;
 
@@ -15,11 +15,11 @@ class ActivityVolunterController extends GetxController {
 
   void init() {
     _isLoading(true);
-    _activity(Get.arguments as Activity);
+    _activity(Get.arguments as Activity?);
     _isLoading(false);
   }
 
-  Activity get activity => _activity.value;
+  Activity? get activity => _activity.value;
 
   bool get isLoading => _isLoading.value;
 }

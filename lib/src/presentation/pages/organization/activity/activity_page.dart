@@ -7,7 +7,7 @@ import 'activity_controller.dart';
 
 class ActivityOrganizationPage
     extends GetView<ActivityOrganizationController> {
-  const ActivityOrganizationPage({Key key}) : super(key: key);
+  const ActivityOrganizationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

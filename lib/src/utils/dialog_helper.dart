@@ -10,7 +10,7 @@ abstract class DialogHelper {
       AlertDialog(
         title: Text(
           'INFORMATION',
-          style: Get.textTheme.subtitle1.copyWith(
+          style: Get.textTheme.subtitle1!.copyWith(
             fontSize: 20,
             color: Get.theme.accentColor,
             fontWeight: FontWeight.bold,
@@ -18,20 +18,20 @@ abstract class DialogHelper {
         ),
         content: Text(mensaje),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text(
               'CANCEL',
-              style: Get.textTheme.button.copyWith(
+              style: Get.textTheme.button!.copyWith(
                 color: Get.theme.accentColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
             onPressed: () => Get.back(result: false),
           ),
-          FlatButton(
+          TextButton(
             child: Text(
               'ACCEPT',
-              style: Get.textTheme.button.copyWith(
+              style: Get.textTheme.button!.copyWith(
                 color: Get.theme.accentColor,
                 fontWeight: FontWeight.bold,
               ),
@@ -40,7 +40,7 @@ abstract class DialogHelper {
           )
         ],
       ),
-      useRootNavigator: true,
+      // useRootNavigator: true,
     );
     return result ?? false;
   }
@@ -49,7 +49,7 @@ abstract class DialogHelper {
         AlertDialog(
           title: Text(
             'INFORMATION',
-            style: Get.textTheme.subtitle1.copyWith(
+            style: Get.textTheme.subtitle1!.copyWith(
               fontSize: 20,
               color: Get.theme.accentColor,
               fontWeight: FontWeight.bold,
@@ -57,10 +57,10 @@ abstract class DialogHelper {
           ),
           content: Text(message),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(
                 'ACCEPT',
-                style: Get.textTheme.button.copyWith(
+                style: Get.textTheme.button!.copyWith(
                   color: Get.theme.accentColor,
                   fontWeight: FontWeight.bold,
                 ),

@@ -5,19 +5,19 @@ import '../../../../widgets/widgets.dart';
 import 'activity_dialog_controller.dart';
 
 class ActivityDialog extends StatelessWidget {
-  const ActivityDialog({Key key}) : super(key: key);
+  const ActivityDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
       init: ActivityDialogController(),
-      builder: (_) => _ActivityDialog(),
+      builder: (dynamic _) => _ActivityDialog(),
     );
   }
 }
 
 class _ActivityDialog extends GetView<ActivityDialogController> {
-  const _ActivityDialog({Key key}) : super(key: key);
+  const _ActivityDialog({Key? key}) : super(key: key);
   static final _border = OutlineInputBorder(
     borderRadius: BorderRadius.circular(4.0),
     borderSide: BorderSide(
@@ -29,7 +29,7 @@ class _ActivityDialog extends GetView<ActivityDialogController> {
     return AlertDialog(
       title: Text(
         'ACTIVITY',
-        style: Get.textTheme.headline6.copyWith(
+        style: Get.textTheme.headline6!.copyWith(
           color: Palette.accent,
           fontWeight: FontWeight.bold,
         ),
@@ -62,20 +62,20 @@ class _ActivityDialog extends GetView<ActivityDialogController> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text(
             'CANCEL',
-            style: Get.textTheme.button.copyWith(
+            style: Get.textTheme.button!.copyWith(
               color: Get.theme.accentColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           onPressed: Get.back,
         ),
-        FlatButton(
+        TextButton(
           child: Text(
             'ACCEPT',
-            style: Get.textTheme.button.copyWith(
+            style: Get.textTheme.button!.copyWith(
               color: Get.theme.accentColor,
               fontWeight: FontWeight.bold,
             ),

@@ -6,7 +6,7 @@ import '../../../widgets/widgets.dart';
 import 'activity_controller.dart';
 
 class ActivityVolunterPage extends GetView<ActivityVolunterController> {
-  const ActivityVolunterPage({Key key}) : super(key: key);
+  const ActivityVolunterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ActivityVolunterPage extends GetView<ActivityVolunterController> {
                           Flexible(
                             flex: 60,
                             child: Text(
-                              '${controller.activity.name}',
+                              '${controller.activity!.name}',
                               overflow: TextOverflow.visible,
                               style: const TextStyle(
                                 color: Colors.black,
@@ -44,7 +44,7 @@ class ActivityVolunterPage extends GetView<ActivityVolunterController> {
                           Flexible(
                             flex: 40,
                             child: Text(
-                              Helpers.formatDate(controller.activity.date),
+                              Helpers.formatDate(controller.activity!.date!),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )
@@ -52,7 +52,7 @@ class ActivityVolunterPage extends GetView<ActivityVolunterController> {
                       ),
                       gap18,
                       const Divider(),
-                      Text(controller.activity.description),
+                      Text(controller.activity!.description!),
                       gap18,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,7 +66,7 @@ class ActivityVolunterPage extends GetView<ActivityVolunterController> {
                             ),
                           ),
                           Text(
-                            '( ${controller.activity.activities.length} )',
+                            '( ${controller.activity!.activities!.length} )',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: Palette.accent,
@@ -77,7 +77,7 @@ class ActivityVolunterPage extends GetView<ActivityVolunterController> {
                       ),
                       const Divider(),
                       gap18,
-                      ...controller.activity.activities
+                      ...controller.activity!.activities!
                           .map(
                             (e) => ListTile(
                               leading: const Icon(Icons.view_list),

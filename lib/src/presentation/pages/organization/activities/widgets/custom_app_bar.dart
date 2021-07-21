@@ -5,19 +5,19 @@ import '../../../../widgets/widgets.dart';
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final VoidCallback changeSearching;
   final bool isSearching;
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
   final ValueChanged<String> onChanged;
 
   const CustomAppBar({
-    Key key,
-    @required this.changeSearching,
-    @required this.controller,
-    @required this.isSearching,
-    @required this.focusNode,
-    @required this.onChanged,
+    Key? key,
+    required this.changeSearching,
+    required this.controller,
+    required this.isSearching,
+    required this.focusNode,
+    required this.onChanged,
   }) : super(key: key);
 
   @override

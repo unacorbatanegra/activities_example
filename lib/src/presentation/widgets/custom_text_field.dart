@@ -5,26 +5,26 @@ import 'palette.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key key,
-    @required this.controller,
-    @required this.label,
-    @required this.hint,
+    Key? key,
+    required this.controller,
+    required this.label,
+    required this.hint,
     this.validator,
     this.readOnly = false,
     this.onChanged,
     this.keyboardType,
     this.onTap,
   }) : super(key: key);
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String label;
   final String hint;
 
   final bool readOnly;
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
-  final String Function(String) validator;
-  final ValueChanged<String> onChanged;
-  final VoidCallback onTap;
+  final String? Function(String?)? validator;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onTap;
   static final _border = OutlineInputBorder(
     borderRadius: BorderRadius.circular(4.0),
     borderSide: BorderSide(

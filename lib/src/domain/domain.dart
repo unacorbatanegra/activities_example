@@ -15,7 +15,7 @@ abstract class Domain<T> {
 
   String get uidV1 => uuid.v1();
 
-  String get currentUserUid => repository.currentUser;
+  String? get currentUserUid => repository.currentUser;
 
   @mustCallSuper
   void clearPagination() => repository.clearPagination();

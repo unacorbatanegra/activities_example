@@ -4,16 +4,16 @@ import '../domain.dart';
 import '../domains.dart';
 
 class ActivityDomain extends Domain<Activity> {
-  DocumentSnapshot lastDocument;
-  int lastLength;
+  DocumentSnapshot? lastDocument;
+  int? lastLength;
 
   UserDomain userDomain = UserDomain();
 
-  Future<List<Activity>> getList({
+  Future<List<Activity?>> getList({
     bool startAfterTheLastDocument = false,
   }) =>
       repository.getList(
-        (_) => Activity.fromJson(_),
+         Activity.fromJson,
         Collections.activities,
         startAfterTheLastDocument: startAfterTheLastDocument,
       );
@@ -21,10 +21,10 @@ class ActivityDomain extends Domain<Activity> {
   Future<List<Activity>> getListQuery({
     int limit = 20,
     bool startAfterTheLastDocument = false,
-    String name,
+    String? name,
   }) async {
     var list = <Activity>[];
-    if (lastLength != null && lastLength % limit != 0) return list;
+    if (lastLength != null && lastLength! % limit != 0) return list;
     final collection = repository.getFromCollection(Collections.activities);
     var ref = collection.limit(limit);
     if (name != null && name.isNotEmpty) {
@@ -42,13 +42,13 @@ class ActivityDomain extends Domain<Activity> {
     }
 
     final documents = startAfterTheLastDocument && lastDocument != null
-        ? await ref.startAfterDocument(lastDocument).get()
+        ? await ref.startAfterDocument(lastDocument!).get()
         : await ref.get();
     if (documents.docs.isNotEmpty) {
       lastDocument = documents.docs.last;
       lastLength = documents.docs.length;
       list = repository.getFromDocuments(
-        (_) => Activity.fromJson(_),
+         Activity.fromJson,
         documents.docs,
       );
     }
@@ -59,10 +59,10 @@ class ActivityDomain extends Domain<Activity> {
   Future<List<Activity>> getListOrg({
     int limit = 20,
     bool startAfterTheLastDocument = false,
-    String name,
+    String? name,
   }) async {
     var list = <Activity>[];
-    if (lastLength != null && lastLength % limit != 0) return list;
+    if (lastLength != null && lastLength! % limit != 0) return list;
     final collection = repository.getFromCollection(Collections.activities);
 
     var ref = collection.limit(limit).where(
@@ -85,14 +85,14 @@ class ActivityDomain extends Domain<Activity> {
     }
 
     final documents = startAfterTheLastDocument && lastDocument != null
-        ? await ref.startAfterDocument(lastDocument).get()
+        ? await ref.startAfterDocument(lastDocument!).get()
         : await ref.get();
 
     if (documents.docs.isNotEmpty) {
       lastDocument = documents.docs.last;
       lastLength = documents.docs.length;
       list = repository.getFromDocuments(
-        (_) => Activity.fromJson(_),
+        Activity.fromJson,
         documents.docs,
       );
     }
@@ -110,7 +110,7 @@ class ActivityDomain extends Domain<Activity> {
     );
   }
 
-  Future<void> delete(String uuid) => repository.delete(
+  Future<void> delete(String? uuid) => repository.delete(
         uuid: uuid,
         collection: Collections.activities,
       );

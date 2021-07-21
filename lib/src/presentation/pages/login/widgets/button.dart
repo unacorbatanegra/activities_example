@@ -6,11 +6,11 @@ import '../../../widgets/widgets.dart';
 class Button extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
-  final Widget child;
+  final Widget? child;
   const Button({
-    Key key,
-    @required this.onTap,
-    @required this.label,
+    Key? key,
+    required this.onTap,
+    required this.label,
     this.child,
   }) : super(key: key);
 

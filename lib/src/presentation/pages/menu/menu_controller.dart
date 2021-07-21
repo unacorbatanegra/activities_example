@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../domain/domains.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
-import 'extension.dart';
+
 import 'widgets/items.dart';
 import 'widgets/role_dialog/role_dialog.dart';
 
@@ -19,8 +19,8 @@ class MenuController extends GetxController {
   final _currentRole = Rx<Role>(Role.organization);
 
   MenuController({
-    @required this.userDomain,
-  }) : assert(userDomain != null);
+    required this.userDomain,
+  }) ;
 
   @override
   void onInit() {
@@ -36,27 +36,27 @@ class MenuController extends GetxController {
       final result = await Get.dialog(
         RoleDialog(),
         barrierDismissible: false,
-      ) as bool;
+      ) as bool?;
       if (result ?? false) {
         refreshRole();
       }
     }
     print(user?.toJson());
-    conectivity.onConnectivityChanged.listen(
-      (result) => result == ConnectivityResult.none
-          ? Get.showSnackBar(
-              const SnackBar(
-                content: Text('No connection :('),
-                duration: Duration(days: 1),
-              ),
-            )
-          : Get.hideSnackBar(),
-    );
+    // conectivity.onConnectivityChanged.listen(
+    //   (result) => result == ConnectivityResult.none
+    //       ? Get.showSnackBar(
+    //           const SnackBar(
+    //             content: Text('No connection :('),
+    //             duration: Duration(days: 1),
+    //           ),
+    //         )
+    //       : Get.hideSnackBar(),
+    // );
     _isLoading(false);
   }
 
   void refreshRole() {
-    _currentRole(userDomain.currentUser.role);
+    _currentRole(userDomain.currentUser!.role!);
   }
 
   Widget get currentChild => Items.pages[_currentRole().index][currentIndex];

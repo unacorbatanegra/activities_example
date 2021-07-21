@@ -15,7 +15,7 @@ class Menu extends StatelessWidget {
 }
 
 class _Menu extends GetView<MenuController> {
-  const _Menu({Key key}) : super(key: key);
+  const _Menu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

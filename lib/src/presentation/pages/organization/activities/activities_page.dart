@@ -8,7 +8,7 @@ import 'widgets/activitie_widget.dart';
 import 'widgets/custom_app_bar.dart';
 
 class ActivitiesOrganizationPage extends StatelessWidget {
-  const ActivitiesOrganizationPage({Key key}) : super(key: key);
+  const ActivitiesOrganizationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,14 @@ class ActivitiesOrganizationPage extends StatelessWidget {
       init: ActivitiesOrganizationController(
         domain: ActivityDomain(),
       ),
-      builder: (_) => _ActivitiesOrganizationPage(),
+      builder: (dynamic _) => _ActivitiesOrganizationPage(),
     );
   }
 }
 
 class _ActivitiesOrganizationPage
     extends GetView<ActivitiesOrganizationController> {
-  const _ActivitiesOrganizationPage({Key key}) : super(key: key);
+  const _ActivitiesOrganizationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

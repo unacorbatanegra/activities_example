@@ -9,14 +9,14 @@ class RoleWidget extends StatelessWidget {
 
   final IconData iconData;
   final Role value;
-  final Role selectedValue;
+  final Role? selectedValue;
   const RoleWidget({
-    Key key,
-    @required this.label,
-    @required this.onSelected,
-    @required this.value,
-    @required this.iconData,
-    @required this.selectedValue,
+    Key? key,
+    required this.label,
+    required this.onSelected,
+    required this.value,
+    required this.iconData,
+    required this.selectedValue,
   }) : super(key: key);
 
   @override

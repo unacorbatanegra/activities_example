@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'widgets.dart';
 
 class CustomButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onPressed;
+  final String? label;
+  final VoidCallback? onPressed;
   final double width;
   final double height;
   final Color color;
   const CustomButton({
-    Key key,
+    Key? key,
     this.label,
     this.onPressed,
     this.height = 48,
@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: Text(
-              label,
+              label!,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

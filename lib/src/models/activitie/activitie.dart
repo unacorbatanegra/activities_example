@@ -1,12 +1,12 @@
 import '../models.dart';
 
 class Activity {
-  String uuid;
-  String name;
-  String description;
-  User organization;
-  DateTime date;
-  List<String> activities;
+  String? uuid;
+  String? name;
+  String? description;
+  User? organization;
+  DateTime? date;
+  List<String>? activities;
 
   Activity({
     this.uuid,
@@ -22,18 +22,18 @@ class Activity {
         'name': name,
         'uuid': uuid,
         'description': description,
-        'organization': organization.toJson(),
+        'organization': organization!.toJson(),
         'activities': activities,
-        'searchName': name.toLowerCase(),
+        'searchName': name!.toLowerCase(),
       };
 
-  factory Activity.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
+  static Activity fromJson(Map<String, dynamic> json) {
+    
     return Activity(
       date: DateTime.fromMillisecondsSinceEpoch(json['date'] as int),
-      name: json['name'] as String,
-      uuid: json['uuid'] as String,
-      description: json['description'] as String,
+      name: json['name'] as String?,
+      uuid: json['uuid'] as String?,
+      description: json['description'] as String?,
       organization: User.fromJsonOrg(
         json['organization'] as Map<String, dynamic>,
       ),

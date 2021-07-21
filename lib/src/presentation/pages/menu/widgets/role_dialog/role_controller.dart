@@ -7,12 +7,12 @@ import '../../../../../utils/utils.dart';
 import '../../../../widgets/widgets.dart';
 
 class RoleController extends GetxController {
-  final role = Rx<Role>();
+  final role = Rxn<Role>();
   final _isLoading = false.obs;
   final UserDomain domain;
 
   RoleController({
-    @required this.domain,
+    required this.domain,
   });
 
   @override
@@ -23,7 +23,7 @@ class RoleController extends GetxController {
 
   void init() {
     _isLoading(true);
-    role(domain.currentUser.role);
+    role(domain.currentUser!.role);
     _isLoading(false);
   }
 
@@ -32,7 +32,7 @@ class RoleController extends GetxController {
         'Are you sure do you wanna switch your account')) {
       return;
     }
-    final user = domain.currentUser;
+    final user = domain.currentUser!;
     user.role = role();
     Get.dialog(ProcessingDialog);
     await domain.put(user);

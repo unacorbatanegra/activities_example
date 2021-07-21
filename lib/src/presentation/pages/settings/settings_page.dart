@@ -5,7 +5,7 @@ import '../../../domain/domains.dart';
 import 'settings_controller.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key key}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +13,13 @@ class SettingsPage extends StatelessWidget {
       init: SettingsController(
         authDomain: AuthDomain(),
       ),
-      builder: (_) => _SettingsPage(),
+      builder: (dynamic _) => _SettingsPage(),
     );
   }
 }
 
 class _SettingsPage extends GetView<SettingsController> {
-  const _SettingsPage({Key key}) : super(key: key);
+  const _SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

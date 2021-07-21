@@ -18,7 +18,7 @@ class RoleAdapter extends TypeAdapter<Role> {
       case 1:
         return Role.volunter;
       default:
-        return null;
+        return Role.organization;
     }
   }
 

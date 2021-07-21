@@ -11,7 +11,7 @@ class SettingsController extends GetxController {
   final AuthDomain authDomain;
   final _isAnonymous = false.obs;
   SettingsController({
-    @required this.authDomain,
+    required this.authDomain,
   });
   @override
   void onInit() {
@@ -29,7 +29,7 @@ class SettingsController extends GetxController {
     final result = await Get.dialog(
       RoleDialog(),
       barrierDismissible: false,
-    ) as bool;
+    ) as bool?;
     if (result ?? false) {
       Get.find<MenuController>().refreshRole();
     }

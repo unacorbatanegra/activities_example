@@ -12,15 +12,15 @@ class ActivityOrganizationController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController;
-  TextEditingController description;
+  TextEditingController? nameController;
+  TextEditingController? description;
   final activities = <String>[].obs;
-  final _date = Rx<DateTime>();
-  Activity activity;
+  final _date = Rxn<DateTime>();
+  Activity? activity;
   final _isEditing = false.obs;
   final _isLoading = false.obs;
 
-  ActivityOrganizationController({@required this.domain});
+  ActivityOrganizationController({required this.domain});
 
   @override
   void onInit() {
@@ -36,13 +36,13 @@ class ActivityOrganizationController extends GetxController {
 Are you sure do you wanna delete this activitt, this action cannot undone''')) {
       return;
     }
-    await domain.delete(activity.uuid);
+    await domain.delete(activity!.uuid);
     Get.back(result: true);
   }
 
   void onDate() async {
     final result = await showDatePicker(
-      context: Get.context,
+      context: Get.context!,
       currentDate: DateTime.now(),
       initialDate: DateTime.now(),
       firstDate: DateTime.now().subtract(365.days),
@@ -54,8 +54,15 @@ Are you sure do you wanna delete this activitt, this action cannot undone''')) {
     _date.value = result;
   }
 
+  String? phoneNumberValidator(String value) {
+    if (value.isPhoneNumber) {
+      return null;
+    }
+    return 'Please provide a valid number';
+  }
+
   void accept() async {
-    if (!formKey.currentState.validate()) return;
+    if (!formKey.currentState!.validate()) return;
     if (activities.isEmpty) {
       DialogHelper.infoDialog('Activities must not be empty');
       return;
@@ -64,8 +71,8 @@ Are you sure do you wanna delete this activitt, this action cannot undone''')) {
     await domain.put(
       Activity(
         uuid: activity?.uuid,
-        name: nameController.text,
-        description: description.text,
+        name: nameController!.text,
+        description: description!.text,
         activities: activities,
         organization: activity?.organization,
         date: date,
@@ -75,18 +82,18 @@ Are you sure do you wanna delete this activitt, this action cannot undone''')) {
     Get.back(result: true);
   }
 
-  String validator(String value) =>
-      value.isEmpty ? 'value must not be empty' : null;
+  String? validator(String? value) =>
+      value!.isEmpty ? 'value must not be empty' : null;
 
   void init() async {
     _isLoading(true);
-    activity = Get.arguments as Activity;
+    activity = Get.arguments as Activity?;
     _isEditing.value = activity != null;
     if (isEditing) {
-      nameController.text = activity.name;
-      description.text = activity.description;
-      _date.value = activity.date;
-      activities.assignAll(activity.activities);
+      nameController!.text = activity!.name!;
+      description!.text = activity!.description!;
+      _date.value = activity!.date;
+      activities.assignAll(activity!.activities!);
     }
     _isLoading(false);
   }
@@ -98,7 +105,7 @@ Are you sure do you wanna delete this activitt, this action cannot undone''')) {
       ActivityDialog(),
       barrierDismissible: false,
       arguments: activities[idx],
-    ) as String;
+    ) as String?;
     if (result == null) return;
     activities[idx] = result;
   }
@@ -107,17 +114,17 @@ Are you sure do you wanna delete this activitt, this action cannot undone''')) {
     final result = await Get.dialog(
       ActivityDialog(),
       barrierDismissible: false,
-    ) as String;
+    ) as String?;
     if (result == null) return;
     activities.add(result);
   }
 
-  DateTime get date => _date.value;
+  DateTime? get date => _date.value;
   bool get isEditing => _isEditing.value;
   bool get isLoading => _isLoading.value;
   String get dateFormat {
     if (date != null) {
-      return Helpers.formatDate(date);
+      return Helpers.formatDate(date!);
     } else {
       return 'pick a date';
     }

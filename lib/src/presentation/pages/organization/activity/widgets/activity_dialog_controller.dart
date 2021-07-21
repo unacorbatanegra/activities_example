@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class ActivityDialogController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  TextEditingController controller;
+  TextEditingController? controller;
 
   @override
   void onInit() {
@@ -15,17 +15,17 @@ class ActivityDialogController extends GetxController {
 
   void init() {
     if (Get.arguments != null) {
-      controller.text = Get.arguments as String;
+      controller!.text = Get.arguments as String;
     }
   }
 
   void onAccept() {
-    if (!formKey.currentState.validate()) return;
-    Get.back(result: controller.text);
+    if (!formKey.currentState!.validate()) return;
+    Get.back(result: controller!.text);
   }
 
-  String validator(String value) =>
-      value.isEmpty ? 'Value must not be empty' : null;
+  String? validator(String? value) =>
+      value!.isEmpty ? 'Value must not be empty' : null;
   @override
   void onClose() {
     controller?.dispose();

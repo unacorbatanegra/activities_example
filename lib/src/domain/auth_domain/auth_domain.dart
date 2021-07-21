@@ -29,15 +29,15 @@ class AuthDomain extends Domain<User> {
     final result = await firebaseAuth.signInAnonymously();
     if (result == null) return;
 
-    print(result.user.displayName);
-    HiveHelperSettings.put('isAnonymous', result.user.isAnonymous);
+    print(result.user!.displayName);
+    HiveHelperSettings.put('isAnonymous', result.user!.isAnonymous);
   }
 
   Future<void> _signIn(OAuthCredential credential) async {
     final userCredential = await firebaseAuth.signInWithCredential(credential);
-    HiveHelperSettings.put('isAnonymous', userCredential.user.isAnonymous);
-    if (!await checkExistUser(userCredential.user.uid)) {
-      final user = userCredential.user;
+    HiveHelperSettings.put('isAnonymous', userCredential.user!.isAnonymous);
+    if (!await checkExistUser(userCredential.user!.uid)) {
+      final user = userCredential.user!;
       await userDomain.put(
         User(
           email: user.email,

@@ -11,7 +11,7 @@ import 'widgets/custom_app_bar.dart';
 import 'widgets/organization_widget.dart';
 
 class ActivitiesVolunterPage extends StatelessWidget {
-  const ActivitiesVolunterPage({Key key}) : super(key: key);
+  const ActivitiesVolunterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ActivitiesVolunterPage extends StatelessWidget {
 }
 
 class _ActivitiesVolunterPage extends GetView<ActivitiesVolunterController> {
-  const _ActivitiesVolunterPage({Key key}) : super(key: key);
+  const _ActivitiesVolunterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,26 +41,28 @@ class _ActivitiesVolunterPage extends GetView<ActivitiesVolunterController> {
         ),
         backgroundColor: Colors.grey[200],
         body: controller.obx(
-          (list) => list.isNotEmpty
-              ? Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 12.0,
+          ((list) {
+            if (list == null || list.isEmpty) {
+              const Center(child: Text('No activities yet'));
+            }
+            return Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ),
+              child: CupertinoScrollbar(
+                child: GroupedListView<Activity, String?>(
+                  elements: list!,
+                  indexedItemBuilder: (context, e, index) => ActivitieWidget(
+                    onTap: () => controller.onTap(index),
+                    activitie: e,
                   ),
-                  child: CupertinoScrollbar(
-                    child: GroupedListView<Activity, String>(
-                      elements: list,
-                      indexedItemBuilder: (context, e, index) =>
-                          ActivitieWidget(
-                        onTap: () => controller.onTap(index),
-                        activitie: e,
-                      ),
-                      groupBy: (e) => e.organization.uid,
-                      groupHeaderBuilder: (value) => OrganizationWidget(value),
-                    ),
-                  ),
-                )
-              : const Center(child: Text('No activities yet')),
+                  groupBy: (e) => e.organization!.uid,
+                  groupHeaderBuilder: (value) => OrganizationWidget(value),
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );

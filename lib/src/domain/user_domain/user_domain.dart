@@ -1,9 +1,9 @@
 import '../domain.dart';
 
-class UserDomain extends Domain<User> {
-  Future<User> get(String key) async {
+class UserDomain extends Domain<User?> {
+  Future<User?> get(String? key) async {
     final user = await repository.get(
-      (_) => User.fromJson(_),
+      User.fromJson,
       Collections.users,
       key,
     );
@@ -19,7 +19,7 @@ class UserDomain extends Domain<User> {
     return doc.exists;
   }
 
-  User get currentUser => hiveRepository.get('user', 'currentUser');
+  User? get currentUser => hiveRepository.get('user', 'currentUser');
 
   Future<void> put(User user) async {
     if (user.uid == currentUserUid) {

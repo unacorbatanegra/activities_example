@@ -9,11 +9,11 @@ import '../../../../utils/utils.dart';
 class ActivitiesOrganizationController extends GetxController {
   final ActivityDomain domain;
 
-  ScrollController scrollController;
-  TextEditingController controller;
+  ScrollController? scrollController;
+  TextEditingController? controller;
 
   ActivitiesOrganizationController({
-    @required this.domain,
+    required this.domain,
   });
 
   final list = <Activity>[].obs;
@@ -21,7 +21,7 @@ class ActivitiesOrganizationController extends GetxController {
   var _isCharging = false;
   final _isLoading = false.obs;
   final _isSearching = false.obs;
-  FocusNode focusNode;
+  FocusNode? focusNode;
   final debouncer = Debouncer(milliseconds: 500);
 
   @override
@@ -49,8 +49,8 @@ class ActivitiesOrganizationController extends GetxController {
   }
 
   void onScroll() async {
-    final maxScroll = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.position.pixels;
+    final maxScroll = scrollController!.position.maxScrollExtent;
+    final currentScroll = scrollController!.position.pixels;
     if (maxScroll - currentScroll <= Get.height * .20 && !_isCharging) {
       _isCharging = true;
       list.addAll(await domain.getListOrg(startAfterTheLastDocument: true));
@@ -59,9 +59,9 @@ class ActivitiesOrganizationController extends GetxController {
   }
 
   void focusListener() {
-    _isSearching.value = focusNode.hasFocus;
-    if (!focusNode.hasFocus) {
-      controller.text = '';
+    _isSearching.value = focusNode!.hasFocus;
+    if (!focusNode!.hasFocus) {
+      controller!.text = '';
       init();
     }
   }
@@ -76,22 +76,23 @@ class ActivitiesOrganizationController extends GetxController {
   void onAdd() async {
     final result = await Get.toNamed(
       RouteName.activityOrganization,
-    ) as bool;
+    ) as bool?;
     if (result ?? false) init();
   }
 
   void onTap(int index) async {
+    print(index);
     final result = await Get.toNamed(
       RouteName.activityOrganization,
       arguments: list[index],
-    ) as bool;
+    ) as bool?;
     print(result);
     if (result ?? false) init();
   }
 
   bool changeSearching() {
     _isSearching.value = !isSearching;
-    focusNode.requestFocus();
+    focusNode!.requestFocus();
     return _isSearching.value;
   }
 
