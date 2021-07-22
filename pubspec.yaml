@@ -48,3 +48,9 @@ flutter:
       - family: Lato
         fonts:
           - asset: assets/fonts/Lato-Regular.ttf
+      - family: AppIcons
+        fonts:
+          - asset: assets/fonts/app_icons.ttf
+### icon_font_generator:
+# install: pub global activate icon_font_generator
+# run with: `icon_font_generator --from=assets/icons/ --class-name=AppIcons --out-font=assets/fonts/app_icons.ttf --out-flutter=lib/src/presentation/widgets/app_icons.dart`

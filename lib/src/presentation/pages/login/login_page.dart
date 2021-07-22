@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder(
       init: LoginController(authDomain: AuthDomain()),
-      builder: (dynamic _) => _LoginPage(),
+      builder: (_) => _LoginPage(),
     );
   }
 }
@@ -42,11 +42,12 @@ class _LoginPage extends GetView<LoginController> {
               const SizedBox(height: 36.0),
               Button(
                 onTap: controller.login,
+                iconData: AppIcons.google,
                 label: 'login with google',
               ),
               const SizedBox(height: 18.0),
               Button(
-                child: const Icon(Icons.person),
+                iconData: AppIcons.apple,
                 onTap: controller.loginAnonymously,
                 label: 'login anonymously',
               )
